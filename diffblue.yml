@@ -1,0 +1,105 @@
+testCmd: ls
+cbmcArguments:
+  cover-function-only: false
+  do-not-test-methods-with-access: [ private ]
+  java-generate-no-comments: true
+units:
+  - target:
+    - dir: target/classes
+      file: com/adyen/httpclient/HttpURLConnectionClient.class
+      sourceDir: src/main/java
+      sourceFile: com/adyen/httpclient/HttpURLConnectionClient.java
+    # Child of HttpURLConnectionClient.class
+    - dir: target/classes
+      file: com/adyen/Client.class
+      sourceDir: src/main/java
+      sourceFile: com/adyen/Client.java
+    # Child of HttpURLConnectionClient.class
+    - dir: target/classes
+      file: com/adyen/Config.class
+      sourceDir: src/main/java
+      sourceFile: com/adyen/Config.java
+    # Child of HttpURLConnectionClient.class
+    - dir: target/classes
+      file: com/adyen/model/RequestOptions.class
+      sourceDir: src/main/java
+      sourceFile: com/adyen/model/RequestOptions.java
+phases:
+-
+  timeout: 60
+  cbmcArguments:
+    max-nondet-array-length: 10
+    unwind: 1
+    string-non-empty: true
+    java-assume-inputs-non-null: true
+-
+  timeout: 60
+  cbmcArguments:
+    classpath: '/tools/cbmc/models-simple-overlay.jar:/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 10
+    unwind: 1
+-
+  timeout: 60
+  cbmcArguments:
+    classpath: '/tools/cbmc/models-simple-overlay.jar:/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 20
+    unwind: 2
+    string-non-empty: true
+    java-assume-inputs-non-null: true
+-
+  timeout: 60
+  cbmcArguments:
+    classpath: '/tools/cbmc/models-simple-overlay.jar:/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 20
+    unwind: 2
+-
+  timeout: 60
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 30
+    max-nondet-string-length: 10
+    unwind: 3
+    string-non-empty: true
+    java-assume-inputs-non-null: true
+-
+  timeout: 120
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 30
+    max-nondet-string-length: 10
+    unwind: 3
+-
+  timeout: 120
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 30
+    max-nondet-string-length: 10
+    unwind: 4
+    load-containing-class-only: true
+    string-non-empty: true
+    java-assume-inputs-non-null: true
+-
+  timeout: 120
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 50
+    max-nondet-string-length: 50
+    unwind: 4
+    load-containing-class-only: true
+-
+  timeout: 180
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 130
+    max-nondet-string-length: 110
+    unwind: 10
+    string-non-empty: true
+    java-assume-inputs-non-null: true
+    string-printable: true
+-
+  timeout: 180
+  cbmcArguments:
+    classpath: '/tools/cbmc/models.jar:.'
+    max-nondet-array-length: 300
+    max-nondet-string-length: 100
+    unwind: 10
